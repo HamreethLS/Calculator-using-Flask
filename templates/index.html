@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Flask Calculator</title>
+</head>
+<body>
+    <div class="calculator">
+        <form method="POST">
+            <input type="text" id="num1" name="num1" placeholder="Enter first number" required>
+
+            <select name="operation" id="operation" required>
+                <option value="add">+</option>
+                <option value="subtract">-</option>
+                <option value="multiply">*</option>
+                <option value="divide">/</option>
+                <option value="sqrt">√ (Square Root)</option>
+                <option value="exponent">^ (Exponentiation)</option>
+            </select>
+
+            <input type="text" id="num2" name="num2" placeholder="Enter second number (optional for √)">
+            
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if result is not none %}
+        <p class="result">Result: {{ result }}</p>
+        {% endif %}
+        
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+
+    <script>
+        // Keyboard support for calculator
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                document.querySelector('form').submit();
+            }
+        });
+    </script>
+</body>
+</html>
